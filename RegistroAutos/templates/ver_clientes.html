@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Clientes{% endblock %}
+
+{% block content %}
+    <h2>Lista de Clientes</h2>
+    <ul>
+        {% for cliente in clientes %}
+            <li>{{ cliente.nombre }} {{ cliente.apellido }} - {{ cliente.correo }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
+    <a href="{% url 'home' %}">Volver al Inicio</a>
+{% endblock %}

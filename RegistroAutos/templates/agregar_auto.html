@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Nuevo Auto{% endblock %}
+
+{% block content %}
+    <h2>Agregar Nuevo Auto</h2>
+    <form method="post" action="{% url 'agregar_auto' %}">
+        {% csrf_token %}
+
+        <label for="fabricante">Fabricante:</label>
+        <input type="text" name="fabricante" required><br>
+
+        <label for="modelo">Modelo:</label>
+        <input type="text" name="modelo" required><br>
+
+        <label for="año">Año:</label>
+        <input type="number" name="año" required><br>
+
+        <label for="color">Color:</label>
+        <input type="text" name="color" required><br>
+
+
+        <button type="submit">Agregar Auto</button>
+
+    </form>
+    <a href="{% url 'home' %}">Volver al Inicio</a>
+{% endblock %}

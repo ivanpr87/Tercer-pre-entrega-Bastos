@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Autos{% endblock %}
+
+{% block content %}
+    <h2>Autos Registrados</h2>
+    <ul>
+        {% for auto in autos %}
+            <li>{{ auto.fabricante }} - {{ auto.modelo }} - {{ auto.año }} - {{ auto.color }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Agrega un enlace o botón para volver al inicio -->
+    <a href="{% url 'home' %}">Volver al Inicio</a>
+{% endblock %}

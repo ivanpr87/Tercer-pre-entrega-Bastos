@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <h2>Bienvenido</h2>
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }}.</p>
+        <a href="{% url 'agregar_auto' %}">Agregar Auto</a>
+        <a href="{% url 'ver_autos' %}">Ver Autos</a>
+        <a href="{% url 'ver_registros_actividades' %}">Ver Registros de Actividades</a>
+        <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
+        <a href="{% url 'ver_clientes' %}">Ver Clientes</a>
+    {% else %}
+        <p>Esta es la página de inicio.</p>
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'register' %}">Registrarse</a>
+    {% endif %}
+{% endblock %}

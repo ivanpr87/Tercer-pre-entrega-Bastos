@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Registros de Actividades{% endblock %}
+
+{% block content %}
+    <h2>Registros de Actividades</h2>
+    {% if user_activities %}
+        <ul>
+            {% for activity in user_activities %}
+                <li>{{ activity.user.username }} - {{ activity.activity_type }} - {{ activity.timestamp }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay registros de actividades.</p>
+    {% endif %}
+    <a href="{% url 'home' %}">Volver a Inicio</a>
+{% endblock %}
