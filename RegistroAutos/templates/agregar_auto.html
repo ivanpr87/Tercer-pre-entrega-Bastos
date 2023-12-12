@@ -3,25 +3,54 @@
 {% block title %}Agregar Nuevo Auto{% endblock %}
 
 {% block content %}
-    <h2>Agregar Nuevo Auto</h2>
-    <form method="post" action="{% url 'agregar_auto' %}">
-        {% csrf_token %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <img src="{{ user.perfil.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle" width="50">
+                    <p class="mt-2">¡Hola, {{ user.username }}!</p>
+                </div>
 
-        <label for="fabricante">Fabricante:</label>
-        <input type="text" name="fabricante" required><br>
+                <h2 class="mb-4">Agregar Nuevo Auto</h2>
+                <form method="post" action="{% url 'agregar_auto' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-        <label for="modelo">Modelo:</label>
-        <input type="text" name="modelo" required><br>
+                    <div class="mb-3">
+                        <label for="fabricante" class="form-label">Fabricante:</label>
+                        <input type="text" name="fabricante" class="form-control" required>
+                    </div>
 
-        <label for="año">Año:</label>
-        <input type="number" name="año" required><br>
+                    <div class="mb-3">
+                        <label for="modelo" class="form-label">Modelo:</label>
+                        <input type="text" name="modelo" class="form-control" required>
+                    </div>
 
-        <label for="color">Color:</label>
-        <input type="text" name="color" required><br>
+                    <div class="mb-3">
+                        <label for="año" class="form-label">Año:</label>
+                        <input type="number" name="año" class="form-control" required>
+                    </div>
 
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Color:</label>
+                        <input type="text" name="color" class="form-control" required>
+                    </div>
 
-        <button type="submit">Agregar Auto</button>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen:</label>
+                        <input type="file" name="imagen" accept="image/*" class="form-control" required>
+                    </div>
 
-    </form>
-    <a href="{% url 'home' %}">Volver al Inicio</a>
+                    <div class="text-center">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Agregar Auto</button>
+                        </div>
+
+                        <div class="mb-3">
+                            <a href="{% url 'home' %}" class="btn btn-secondary">Volver al Inicio</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

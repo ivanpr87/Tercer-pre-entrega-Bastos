@@ -2,10 +2,16 @@
 
 {% block content %}
   <h2>Registro</h2>
-  <form method="post" action="{% url 'register' %}">
+  <form method="post" action="{% url 'register' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    {{ user_form.as_p }}
+
+    <!-- Agrega el formulario de perfil y el campo de avatar -->
+    {{ perfil_form.as_p }}
+
     <button type="submit">Registrarse</button>
   </form>
   <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Iniciar Sesión</a>.</p>
 {% endblock %}
+

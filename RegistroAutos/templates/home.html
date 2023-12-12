@@ -3,17 +3,38 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <h2>Bienvenido</h2>
-    {% if user.is_authenticated %}
-        <p>Bienvenido, {{ user.username }}.</p>
-        <a href="{% url 'agregar_auto' %}">Agregar Auto</a>
-        <a href="{% url 'ver_autos' %}">Ver Autos</a>
-        <a href="{% url 'ver_registros_actividades' %}">Ver Registros de Actividades</a>
-        <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
-        <a href="{% url 'ver_clientes' %}">Ver Clientes</a>
-    {% else %}
-        <p>Esta es la página de inicio.</p>
-        <a href="{% url 'login' %}">Iniciar Sesión</a>
-        <a href="{% url 'register' %}">Registrarse</a>
-    {% endif %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4">¡Bienvenido!</h2>
+
+                {% if user.is_authenticated and user.perfil %}
+                    <div id="user-info" class="mb-4">
+                        <img src="{{ user.perfil.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle" width="100">
+                        <p class="mt-2"> {{ user.username }}</p>
+
+                    </div>
+                    <div class="mb-4">
+                        <div class="btn-group shadow" role="group" aria-label="Acciones">
+                            <a href="{% url 'agregar_auto' %}" class="btn btn-success">Agregar Auto</a>
+                            <a href="{% url 'ver_autos' %}" class="btn btn-success">Ver Autos</a>
+                            <a href="{% url 'ver_registros_actividades' %}" class="btn btn-success">Registros de Actividades</a>
+                            <a href="{% url 'agregar_cliente' %}" class="btn btn-success">Agregar Cliente</a>
+                            <a href="{% url 'ver_clientes' %}" class="btn btn-success">Ver Clientes</a>
+                            {% if user.perfil.rol == 'admin' %}
+                                <a href="{% url 'modificar_auto' %}" class="btn btn-danger">Modificar Auto</a>
+                                <a href="{% url 'borrar_auto' %}" class="btn btn-danger">Borrar Auto</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="mb-4">Esta es la página de inicio.</p>
+                    <div class="btn-group shadow" role="group" aria-label="Acciones">
+                        <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+                        <a href="{% url 'register' %}" class="btn btn-secondary">Registrarse</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

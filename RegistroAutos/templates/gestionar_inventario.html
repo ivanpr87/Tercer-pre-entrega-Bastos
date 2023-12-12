@@ -3,11 +3,17 @@
 {% block title %}Gestionar Inventario - {{ auto.marca.nombre }} {{ auto.modelo }}{% endblock %}
 
 {% block content %}
-  <h2>Gestionar Inventario - {{ auto.marca.nombre }} {{ auto.modelo }}</h2>
-  <form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar</button>
-  </form>
-  <a href="{% url 'ver_inventario' %}">Volver al Inventario</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">Gestionar Inventario - {{ auto.marca.nombre }} {{ auto.modelo }}</h2>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+                <a href="{% url 'ver_inventario' %}" class="btn btn-secondary mt-3">Volver al Inventario</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

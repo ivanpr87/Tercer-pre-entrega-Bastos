@@ -3,15 +3,25 @@
 {% block title %}Registros de Actividades{% endblock %}
 
 {% block content %}
-    <h2>Registros de Actividades</h2>
-    {% if user_activities %}
-        <ul>
-            {% for activity in user_activities %}
-                <li>{{ activity.user.username }} - {{ activity.activity_type }} - {{ activity.timestamp }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay registros de actividades.</p>
-    {% endif %}
-    <a href="{% url 'home' %}">Volver a Inicio</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4">Registros de Actividades</h2>
+
+                {% if user_activities %}
+                    <ul class="list-group">
+                        {% for activity in user_activities %}
+                            <li class="list-group-item">
+                                <strong>{{ activity.user.username }}</strong> - {{ activity.activity_type }} - {{ activity.timestamp|date:"F d, Y H:i:s" }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No hay registros de actividades.</p>
+                {% endif %}
+
+                <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Volver a Inicio</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

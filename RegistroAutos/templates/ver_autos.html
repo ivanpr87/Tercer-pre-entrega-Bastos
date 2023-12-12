@@ -3,13 +3,23 @@
 {% block title %}Lista de Autos{% endblock %}
 
 {% block content %}
-    <h2>Autos Registrados</h2>
-    <ul>
-        {% for auto in autos %}
-            <li>{{ auto.fabricante }} - {{ auto.modelo }} - {{ auto.año }} - {{ auto.color }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="mb-4">Autos Registrados</h2>
+                <ul class="list-group">
+                    {% for auto in autos %}
+                        <li class="list-group-item">
+                            {{ auto.fabricante }} - {{ auto.modelo }} - {{ auto.año }} - {{ auto.color }}
+                            <a href="{% url 'detalles_auto' auto.id %}" class="btn btn-primary btn-sm float-end">Detalles</a>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-    <!-- Agrega un enlace o botón para volver al inicio -->
-    <a href="{% url 'home' %}">Volver al Inicio</a>
+                <!-- Agrega un enlace o botón para volver al inicio -->
+                <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Volver al Inicio</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

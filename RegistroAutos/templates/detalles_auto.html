@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalles del Auto{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <h2 class="mb-4">Detalles del Auto - ID: {{ auto.id }}</h2>
+                <p>Fabricante: {{ auto.fabricante }}</p>
+                <p>Modelo: {{ auto.modelo }}</p>
+                <p>Año: {{ auto.año }}</p>
+                <p>Color: {{ auto.color }}</p>
+
+                {% if auto.imagen %}
+                    <div class="text-center">
+                        <img src="{{ auto.get_imagen_url }}" alt="Imagen del Auto" class="auto-imagen">
+                    </div>
+
+                {% else %}
+                    <div class="text-center">
+                        <img src="{% static 'assets/img/imagenNoDisp.png' %}" alt="Imagen Predeterminada" class="">
+                    </div>
+                {% endif %}
+
+                <!-- Agrega un enlace o botón para volver a la lista de autos -->
+                <a href="{% url 'ver_autos' %}" class="btn btn-primary mt-3">Volver a la Lista de Autos</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .auto-imagen {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+{% endblock %}
+

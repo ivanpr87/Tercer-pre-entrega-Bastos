@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="mb-4">Modificar Auto</h2>
+    <form method="post" enctype="multipart/form-data" class="text-center">
+        {% csrf_token %}
+        {{ seleccionar_auto_form.as_p }}
+        {{ modificar_auto_form.as_p }}
+        <button class="btn btn-secondary" type="submit">Guardar Cambios</button>
+        <a href="{% url 'ver_autos' %}" class="btn btn-success ml-2">Ver Autos</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary ml-2">Volver al Inicio</a>
+    </form>
+
+</div>
+{% endblock %}

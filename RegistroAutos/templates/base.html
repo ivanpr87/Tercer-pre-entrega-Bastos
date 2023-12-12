@@ -16,18 +16,44 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        {% block styles %}{% endblock %}
     </head>
     <body>
-    {% block content %}{% endblock %}
-    {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Cerrar Sesión</a>
-        {% endif %}
+ {% if user.is_authenticated and user.perfil %}
+     <nav id="user-info" class="mb-4 bg-light p-3">
+    <div class="user-details text-center">
+        <img src="{% get_media_prefix %}{{ user.perfil.avatar }}" alt="Avatar" width="50" height="50">
+        <p class="mt-2">¡Hola, {{ user.username }}!</p>
+    </div>
+    <div class="user-actions text-center mt-3">
+        <a href="{% url 'logout' %}" class="btn btn-primary">Cerrar Sesión</a>
+    </div>
+         <div class="text-center mt-3">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Ir al Inicio</a>
+             <a href="{% url 'about' %}" class="btn btn-outline-secondary">Acerca de Mí</a>
+         </div>
+
+    {% if not user.is_authenticated %}
+        <div class="text-center mt-3">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Ir al Inicio</a>
+        </div>
+    {% endif %}
+</nav>
+
+ {% else %}
+                                <!-- Resto del contenido para usuarios no autenticados -->
+ {% endif %}
+   {% block content %}
+
         <!-- Masthead-->
         <header class="masthead">
+
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
                         <div class="text-center text-white">
+
+
                             <!-- Page heading-->
                             <h1 class="mb-5">Generate more leads with a professional landing page!</h1>
                             <!-- Signup form-->
@@ -70,6 +96,8 @@
                 </div>
             </div>
         </header>
+
+
         <!-- Icons Grid-->
         <section class="features-icons bg-light text-center">
             <div class="container">
@@ -238,5 +266,8 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+{% endblock %}
+
     </body>
+
 </html>
