@@ -1,0 +1,66 @@
+class AutoModelTest(TestCase):
+
+    def setUp(self):
+        # Crear un objeto Auto con una imagen simulada para las pruebas
+        image = SimpleUploadedFile("auto_image.jpg", b"file_content", content_type="image/jpeg")
+        self.auto = Auto.objects.create(fabricante='Toyota', modelo='Camry', año=2022, color='Rojo', imagen=image)
+
+    def test_auto_str_representation(self):
+        # Verifica si el método __str__ devuelve la representación correcta para el objeto Auto
+        expected_str = f'Toyota - Camry - 2022'
+        self.assertEqual(str(self.auto), expected_str)
+
+    def test_get_imagen_url_with_image(self):
+        expected_partial_url = f'/media/autos/{self.auto.imagen.name.split("/")[-1]}'
+        self.assertIn(expected_partial_url, self.auto.get_imagen_url())
+
+    def test_get_imagen_url_without_image(self):
+        # Verifica si la función maneja correctamente la ausencia de una imagen
+        auto_sin_imagen = Auto.objects.create(fabricante='Ford', modelo='Focus', año=2023, color='Azul')
+
+        self.assertIsNone(auto_sin_imagen.get_imagen_url())
+
+    def tearDown(self):
+        Auto.objects.all().delete()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  test_auto_str_representation:
+
+Propósito: Este test verifica si el método __str__ del modelo Auto devuelve la representación correcta del objeto como cadena.
+Pasos del test:
+Crea un objeto Auto en el método setUp con ciertos atributos.
+Llama al método __str__ del objeto Auto.
+Compara la cadena resultante con la cadena esperada, que se construye a partir de los atributos del objeto.
+Resultado esperado:
+El método __str__ debería devolver la cadena esperada.
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    test_get_imagen_url_with_image:
+
+Propósito: Este test verifica si el método get_imagen_url devuelve la URL correcta para un objeto Auto que tiene una imagen adjunta.
+Pasos del test:
+Crea un objeto Auto con una imagen simulada en el método setUp.
+Llama al método get_imagen_url del objeto Auto.
+Verifica que la URL generada contiene la parte esperada, basada en el nombre de la imagen.
+Resultado esperado:
+La URL generada debería ser correcta y contener la parte esperada.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  test_get_imagen_url_without_image:
+
+Propósito: Este test verifica si el método get_imagen_url maneja correctamente la ausencia de una imagen.
+Pasos del test:
+Crea un objeto Auto sin una imagen adjunta.
+Llama al método get_imagen_url del objeto Auto sin imagen.
+Verifica que el resultado es None.
+Resultado esperado:
+get_imagen_url debería devolver None para un objeto Auto sin imagen adjunta.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  tearDown:
+
+Propósito: Este método se ejecuta después de cada test para limpiar el entorno de prueba.
+Pasos del test:
+Elimina todos los objetos Auto creados durante las pruebas.
+Resultado esperado:
+El entorno de prueba debería quedar limpio después de ejecutar todos los tests.
+      
